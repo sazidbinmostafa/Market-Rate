@@ -54,7 +54,7 @@ function Navbar({
           className="bg-[#05893ee3] p-2 rounded-lg"
         /></Link>
       <div>
-        <h3 className="text-lg font-bold">বাজার দর</h3>
+        <h3 className="text-lg font-bold cursor-default">বাজার দর</h3>
         <TodaysDate />
       </div>
     </div>
@@ -74,7 +74,7 @@ function Navbar({
 
   const rightContent = (
     <div className="flex items-center gap-3">
-      <Link href="#login" className="hover:text-[#05893E]">সাইন ইন</Link>
+      <Link href="#login" className="hover:text-[#05893E] focus:text-[#05893E]">সাইন ইন</Link>
       <Link href="#signup"><Button className="bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-95">সাইন আপ</Button></Link>
     </div>
   )
@@ -130,13 +130,15 @@ function Navbar({
           <ul className="flex flex-col gap-2 p-4">
             {items.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn("block py-2 font-medium text-black hover:text-[#05893E] focus:text-[#05893E]", item.isActive && "text-[#05893E]")}>{item.label}</Link>
+                <Button className="bg-transparent w-full">
+                  <Link
+                    href={item.href}
+                    className={cn("font-medium block p-2 rounded-lg text-black focus:bg-[#05893E] hover:bg-[#05893E] w-full", item.isActive && "bg-[#05893E]")}>{item.label}</Link>
+                </Button>
               </li>
             ))}
             {rightContent && (
-              <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
+              <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4 items-center">
                 {rightContent}
               </li>
             )}
@@ -145,20 +147,22 @@ function Navbar({
       )}
 
       <div className={cn(
-          "h-8 px-6 hidden md:flex items-center justify-between",
-          maxWidth !== "full" && maxWidthClasses[maxWidth],
-          "mx-auto"
-        )}>
+        "h-12 px-6 hidden md:flex items-center justify-between",
+        maxWidth !== "full" && maxWidthClasses[maxWidth],
+        "mx-auto"
+      )}>
         <ul className="hidden items-center gap-4 md:flex">
           {items.map((item) => (
             <li key={item.href}>
-              <Link
-                href={item.href}
-                className={cn("font-medium text-black hover:text-[#05893E] focus:text-[#05893E]", item.isActive && "text-[#05893E]")}
-                aria-current={item.isActive ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
+              <Button className="bg-transparent hover:bg-[#05893E] rounded-lg">
+                <Link
+                  href={item.href}
+                  className={cn("font-medium text-black", item.isActive && "bg-[#05893E]")}
+                  aria-current={item.isActive ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              </Button>
             </li>
           ))}
         </ul>

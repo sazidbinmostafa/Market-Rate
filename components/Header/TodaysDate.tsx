@@ -10,7 +10,7 @@ function TodaysDate() {
     })
 
     return (
-        <p className='text-sm text-[#1D271F]'>{formattedDate}</p>
+        <p className='text-xs text-[#1D271F] cursor-default inter'>{formattedDate}</p>
     )
 }
 

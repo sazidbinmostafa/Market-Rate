@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Header/Navbar";
+import Header from "@/components/Header/Header";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,9 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${hindSiliguri.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar/>
-        {children}
-        </body>
+        <header><Header /></header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

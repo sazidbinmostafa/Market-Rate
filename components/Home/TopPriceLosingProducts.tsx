@@ -27,7 +27,7 @@ async function TopPriceLosingProducts() {
 
     return (
         <div className='container mx-auto'>
-            <h3 className='text-2xl font-bold flex items-center gap-1 mx-auto w-fit md:mx-0 my-3'><span className='text-lg text-[#1A9951]'>▼</span>আজ দাম কমেছে</h3>
+            <h3 className='text-2xl text-[#1D271F] font-bold flex items-center gap-1 mx-auto w-fit md:mx-0 my-3'><span className='text-lg text-[#1A9951]'>▼</span>আজ দাম কমেছে</h3>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {topPriceLosingProducts.map(product=> <ProductCard key={product.id} product={product}/>)}
             </div>

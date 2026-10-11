@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
+/* Root */
+*{
+  scroll-behavior: smooth;
+}
+
 /* Body */
 body {
     font-family: var(--font-hind-siliguri), system-ui, sans-serif;

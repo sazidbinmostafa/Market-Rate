@@ -3,12 +3,18 @@
 import SocialLogin from "@/components/Social-Login/SocialLogin";
 import { authClient } from "@/lib/auth-client";
 import { Button, FieldError, Form, Input, Label, TextField } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function SignUp() {
 
     const router = useRouter()
+    const { data: session } = authClient.useSession();
+
+    if(session?.user){
+        redirect('/profile')
+    }
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -26,6 +32,7 @@ function SignUp() {
         if (data) {
             router.push('/')
             router.refresh()
+            toast.success('Registration Successfull')
         }
         if (error) {
             setErrorMessage(error?.message || "An error occurred during sign up.")

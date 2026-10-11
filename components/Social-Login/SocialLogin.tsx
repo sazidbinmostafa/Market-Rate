@@ -3,6 +3,7 @@ import { Button } from '@heroui/react'
 import { Icon } from "@iconify/react";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 function SocialLogin() {
 
@@ -16,6 +17,7 @@ function SocialLogin() {
         if (data) {
             router.push('/')
             router.refresh()
+            toast.success("Successfully Logged In")
         }
         if (error) {
             setErrorMessage(error?.message || "An error occurred during sign up.")
@@ -28,6 +30,7 @@ function SocialLogin() {
         if (data) {
             router.push('/')
             router.refresh()
+            toast.success("Successfully Logged In")
         }
         if (error) {
             setErrorMessage(error?.message || "An error occurred during sign up.")

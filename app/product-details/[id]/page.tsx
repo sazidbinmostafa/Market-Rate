@@ -42,7 +42,7 @@ function ProductDetails() {
     const highestMarketPrice = Math.max(...maxPrices)
     return (
         <div className='container mx-auto my-8 rounded-lg'>
-            <div className="bg-[#FAFCFA] border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="bg-[#FAFCFA] border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6 ">
                 <div className="flex items-center gap-4">
                     <div className="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center p-2 border border-gray-100 shrink-0">
                         <h1 className='text-3xl'>{product.image}</h1>
@@ -55,7 +55,7 @@ function ProductDetails() {
                         </p>
                     </div>
                 </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl px-6 py-3 text-center min-w-35 ml-auto md:ml-0">
+                <div className="bg-gray-50 border border-gray-200 rounded-xl px-6 py-3 text-center min-w-35 ml-auto md:ml-0 ">
                     <span className="text-xs text-gray-500 block">আজকের দাম</span>
                     <span className="text-3xl font-bold text-[#1D271F] block my-0.5 inter">{toBanglaNumber(product.today)}</span>
                     <span className="text-xs text-gray-500 block">টাকা / {toBanglaUnit(product.unit)}</span>

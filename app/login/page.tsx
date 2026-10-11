@@ -1,13 +1,20 @@
 "use client";
+
 import SocialLogin from "@/components/Social-Login/SocialLogin";
 import { authClient } from "@/lib/auth-client";
 import { Button, FieldError, Form, Input, Label, TextField } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Login() {
 
     const router = useRouter();
+    const { data: session } = authClient.useSession();
+
+    if(session?.user){
+        redirect('/profile')
+    }
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -24,6 +31,7 @@ function Login() {
         if (data) {
             router.push('/')
             router.refresh()
+            toast.success("Successfully Logged In")
         }
         if (error) {
             setErrorMessage(error?.message || "An error occurred during sign up.")

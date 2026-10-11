@@ -29,7 +29,7 @@ const maxWidthClasses = {
 
 const TodaysDate = dynamic(() => import('./TodaysDate'), {
   ssr: false,
-  loading: () => <p className='text-sm text-[#1D271F]'>তারিখ লোড হচ্ছে...</p>
+  loading: () => <p className='text-xs text-[#1D271F]'>তারিখ লোড হচ্ছে...</p>
 })
 
 
@@ -55,7 +55,7 @@ function Navbar({
         /></Link>
       <div>
         <h3 className="text-lg font-bold cursor-default">বাজার দর</h3>
-        <TodaysDate />
+        <span className="text-[#1D271F]"><TodaysDate /></span>
       </div>
     </div>
   )
@@ -75,7 +75,7 @@ function Navbar({
   const rightContent = (
     <div className="flex items-center gap-3">
       <Link href="#login" className="hover:text-[#05893E] focus:text-[#05893E]">সাইন ইন</Link>
-      <Link href="#signup"><Button className="bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-95">সাইন আপ</Button></Link>
+      <Link href="#signup"><Button className="bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-97">সাইন আপ</Button></Link>
     </div>
   )
 

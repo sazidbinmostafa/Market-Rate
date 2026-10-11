@@ -9,8 +9,9 @@ function ProductDetails() {
     const params = useParams();
     const productId = params.id as string;
 
-    const [product, setProduct] = useState<Product>({})
+   const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState<boolean>(true)
+    
 
     useEffect(() => {
         const getProducts = async () => {
@@ -30,6 +31,10 @@ function ProductDetails() {
         }
         getProducts()
     }, [productId])
+
+    if(!product){
+        return <Loading/>
+    }
 
     if (loading) {
         return <Loading />

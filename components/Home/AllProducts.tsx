@@ -19,7 +19,7 @@ async function AllProducts() {
     const allProducts = await getAllProducts();
 
     return (
-        <div id='all-products' className='container mx-auto'>
+        <div id='সব-পণ্য' className='container mx-auto'>
             <div className='my-3 space-y-2 text-center md:text-start'>
                 <h3 className='text-2xl font-bold'>সব পণ্য</h3>
                 <p className='text-sm text-[#1D271F]'>মোট {toBanglaNumber(allProducts.length)}টি পণ্য দেখানো হচ্ছে</p>

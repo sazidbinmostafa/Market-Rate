@@ -1,11 +1,13 @@
 "use client"
 import { useState } from "react";
-import { Button } from "@heroui/react";
+import { Avatar, Button, Dropdown, Label } from "@heroui/react";
 import { cn } from "@/lib/utils"
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client"
+import { Person } from "@gravity-ui/icons";
 
 interface NavbarItem {
   label: string;
@@ -34,8 +36,21 @@ const TodaysDate = dynamic(() => import('./TodaysDate'), {
 })
 
 
-
 function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProps) {
+
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push('/')
+          router.refresh()
+        },
+      },
+    });
+  }
 
   const params = useParams();
   const category = params.slug as string
@@ -61,22 +76,49 @@ function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProp
   )
 
   const items: NavbarItem[] = [
-    { label: "🍚 চাল", category:"chal", href: "/categories/chal", },
-    { label: "🫘 ডাল", category:"dal", href: "/categories/dal", },
-    { label: "🛢️ তেল", category:"tel", href: "/categories/tel", },
-    { label: "🥬 সবজি", category:"sobji", href: "/categories/sobji", },
-    { label: "🐟 মাছ", category:"mach", href: "/categories/mach", },
-    { label: "🍗 মাংস", category:"mangsho", href: "/categories/mangsho", },
-    { label: "🥛 ডিম-দুধ", category:"dim-dui", href: "/categories/dim-dui", },
-    { label: "🌶️ মসলা", category:"mosla", href: "/categories/mosla", },
+    { label: "🍚 চাল", category: "chal", href: "/categories/chal", },
+    { label: "🫘 ডাল", category: "dal", href: "/categories/dal", },
+    { label: "🛢️ তেল", category: "tel", href: "/categories/tel", },
+    { label: "🥬 সবজি", category: "sobji", href: "/categories/sobji", },
+    { label: "🐟 মাছ", category: "mach", href: "/categories/mach", },
+    { label: "🍗 মাংস", category: "mangsho", href: "/categories/mangsho", },
+    { label: "🥛 ডিম-দুধ", category: "dim-dui", href: "/categories/dim-dui", },
+    { label: "🌶️ মসলা", category: "mosla", href: "/categories/mosla", },
   ];
 
 
   const rightContent = (
-    <div className="flex items-center gap-3">
-      <Link href="#login" className="hover:text-[#05893E] focus:text-[#05893E]">সাইন ইন</Link>
-      <Link href="#signup"><Button className="bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-97">সাইন আপ</Button></Link>
-    </div>
+    session?.user ? <div className="flex items-center">
+      <Avatar className="rounded-l-lg rounded-r-none h-10">
+        <Avatar.Image alt={session.user.name} src={session.user.image} />
+        <Avatar.Fallback className="rounded-lg"><Person /></Avatar.Fallback>
+      </Avatar>
+      <Dropdown>
+        <Button aria-label="Menu" variant="secondary" className="text-[#1D271F] rounded-l-none rounded-r-lg h-10">
+          {session.user.name}
+        </Button>
+        <Dropdown.Popover>
+          <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
+            <Dropdown.Item id="user" textValue="User">
+              <Label>
+                <p>{session.user.name}</p>
+                <p>{session.user.email}</p>
+              </Label>
+            </Dropdown.Item>
+            <Dropdown.Item id="profile" textValue="Profile">
+              <Label className="flex items-center gap-2"><Person /> আমার প্রোফাইল</Label>
+            </Dropdown.Item>
+            <Dropdown.Item id="logout" textValue="Log out"  onClick={handleSignOut} >
+              <Label className="flex items-center gap-2 text-red-500">↩ <span>সাইন আউট</span></Label>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
+    </div> :
+      <div className="flex items-center gap-3">
+        <Link href="/login" className="hover:text-[#05893E] focus:text-[#05893E]">সাইন ইন</Link>
+        <Link href="/sign-up" className="px-3 py-2 text-white bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-97">সাইন আপ</Link>
+      </div>
   )
 
   return (
@@ -133,7 +175,7 @@ function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProp
 
                 <Link
                   href={item.href}
-                  className={cn("bg-transparent font-medium block p-2 rounded-lg text-black focus:bg-[#05893E] hover:bg-[#05893E] w-full", item.category === category && "bg-[#05893E]")}>{item.label}</Link>
+                  className={cn("bg-transparent font-medium block p-2 rounded-lg text-[#1D271F] focus:bg-[#05893E] hover:bg-[#05893E] w-full", item.category === category && "bg-[#05893E]")}>{item.label}</Link>
               </li>
             ))}
             {rightContent && (
@@ -155,7 +197,7 @@ function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProp
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={cn("font-medium text-black bg-transparent hover:bg-[#05893E] rounded-lg px-2 py-1", item.category === category && "bg-[#05893E]")}
+                className={cn("font-medium text-[#1D271F] bg-transparent hover:bg-[#05893E] rounded-lg px-2 py-1", item.category === category && "bg-[#05893E]")}
               >{item.label}</Link>
             </li>
           ))}

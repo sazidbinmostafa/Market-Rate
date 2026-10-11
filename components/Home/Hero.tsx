@@ -23,7 +23,7 @@ function Hero() {
                     <Image src="/images/bazar-hero.png" alt="Hero Image" width={400} height={400} />
                 </div>
                 <div className='my-8'>
-                    <a href="#all-products"><Button className="bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-97">সব পণ্য দেখুন</Button></a>
+                    <a href="#সব-পণ্য"><Button className="bg-[#05893E] rounded-lg transition-all duration-300 hover:scale-103 hover:shadow-lg hover:shadow-[#05893E]/30 active:scale-97">সব পণ্য দেখুন</Button></a>
                 </div>
             </div>
             <div className='hidden md:block'>

@@ -11,6 +11,11 @@ body {
     font-family: var(--font-hind-siliguri), system-ui, sans-serif;
 }
 
+/* Main */
+main{
+  background-color: #F0F5F0;
+}
+
 /* Inter Font */
 .inter {
     font-family: var(--font-inter), system-ui, sans-serif;

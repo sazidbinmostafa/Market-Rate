@@ -4,9 +4,7 @@ import ProductCard from '@/components/Shared/ProductCard';
 import { SortingSelect } from '@/components/Shared/SortingSelect';
 import { toBanglaNumber } from '@/lib/formatter';
 import { Product } from '@/types/Product';
-import { Metadata } from 'next';
 import { useParams } from 'next/navigation';
-import { title } from 'process';
 import React, { useEffect, useState } from 'react'
 
 

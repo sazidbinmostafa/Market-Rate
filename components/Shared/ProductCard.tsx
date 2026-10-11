@@ -1,6 +1,8 @@
-import { Product } from '@/.next/types/Product';
+import Link from 'next/link';
 import { toBanglaNumber, toBanglaUnit } from '@/lib/formatter';
+import { Product } from '@/types/Product';
 import { Card } from '@heroui/react'
+
 type ProductCardProps = {
     product: Product
 }
@@ -10,7 +12,7 @@ function ProductCard({ product }: ProductCardProps) {
     const isUp = product.change?.dir === "up";
 
     return (
-        <div>
+        <Link href={`/product-details/${product.id}`}>
             <Card className="w-full gap-2 mx-auto">
                 <div className='flex items-center gap-3'>
                     <h1 className='text-xl bg-[#F0F5F0] p-1 '>{product.image}</h1>
@@ -36,7 +38,7 @@ function ProductCard({ product }: ProductCardProps) {
                     </div>
                 </Card.Footer>
             </Card>
-        </div>
+        </Link>
     )
 }
 

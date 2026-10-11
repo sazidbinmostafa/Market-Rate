@@ -5,11 +5,12 @@ import { cn } from "@/lib/utils"
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 interface NavbarItem {
   label: string;
+  category: string
   href: string;
-  isActive?: boolean;
 }
 
 interface NavbarProps {
@@ -34,14 +35,13 @@ const TodaysDate = dynamic(() => import('./TodaysDate'), {
 
 
 
+function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProps) {
 
+  const params = useParams();
+  const category = params.slug as string
 
-function Navbar({
-  className,
-  maxWidth = "lg",
-  position = "sticky",
-}: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
   const brand = (
     <div className="flex items-center gap-3">
@@ -61,14 +61,14 @@ function Navbar({
   )
 
   const items: NavbarItem[] = [
-    { label: "🍚 চাল", href: "#chal", },
-    { label: "🫘 ডাল", href: "#dal", },
-    { label: "🛢️ তেল", href: "#tel", },
-    { label: "🥬 সবজি", href: "#sobji", },
-    { label: "🐟 মাছ", href: "#mach", },
-    { label: "🍗 মাংস", href: "#mangsho", },
-    { label: "🥛 ডিম-দুধ", href: "#dim-dui", },
-    { label: "🌶️ মসলা", href: "#mosla", },
+    { label: "🍚 চাল", category:"chal", href: "/categories/chal", },
+    { label: "🫘 ডাল", category:"dal", href: "/categories/dal", },
+    { label: "🛢️ তেল", category:"tel", href: "/categories/tel", },
+    { label: "🥬 সবজি", category:"sobji", href: "/categories/sobji", },
+    { label: "🐟 মাছ", category:"mach", href: "/categories/mach", },
+    { label: "🍗 মাংস", category:"mangsho", href: "/categories/mangsho", },
+    { label: "🥛 ডিম-দুধ", category:"dim-dui", href: "/categories/dim-dui", },
+    { label: "🌶️ মসলা", category:"mosla", href: "/categories/mosla", },
   ];
 
 
@@ -130,11 +130,10 @@ function Navbar({
           <ul className="flex flex-col gap-2 p-4">
             {items.map((item) => (
               <li key={item.href}>
-                <Button className="bg-transparent w-full">
-                  <Link
-                    href={item.href}
-                    className={cn("font-medium block p-2 rounded-lg text-black focus:bg-[#05893E] hover:bg-[#05893E] w-full", item.isActive && "bg-[#05893E]")}>{item.label}</Link>
-                </Button>
+
+                <Link
+                  href={item.href}
+                  className={cn("bg-transparent font-medium block p-2 rounded-lg text-black focus:bg-[#05893E] hover:bg-[#05893E] w-full", item.category === category && "bg-[#05893E]")}>{item.label}</Link>
               </li>
             ))}
             {rightContent && (
@@ -154,15 +153,10 @@ function Navbar({
         <ul className="hidden items-center gap-4 md:flex">
           {items.map((item) => (
             <li key={item.href}>
-              <Button className="bg-transparent hover:bg-[#05893E] rounded-lg">
-                <Link
-                  href={item.href}
-                  className={cn("font-medium text-black", item.isActive && "bg-[#05893E]")}
-                  aria-current={item.isActive ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </Button>
+              <Link
+                href={item.href}
+                className={cn("font-medium text-black bg-transparent hover:bg-[#05893E] rounded-lg px-2 py-1", item.category === category && "bg-[#05893E]")}
+              >{item.label}</Link>
             </li>
           ))}
         </ul>

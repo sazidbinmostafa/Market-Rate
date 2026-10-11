@@ -1,7 +1,6 @@
-import { Product } from '@/.next/types/Product';
-import React from 'react'
 import ProductCard from '../Shared/ProductCard';
 import { toBanglaNumber } from '@/lib/formatter';
+import { Product } from '@/types/Product';
 
 async function AllProducts() {
 

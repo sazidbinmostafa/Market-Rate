@@ -1,4 +1,5 @@
-import { Product } from '@/.next/types/Product'
+
+import { Product } from '@/types/Product'
 import ProductCard from '../Shared/ProductCard'
 
 async function TopPriceGainingProducts() {

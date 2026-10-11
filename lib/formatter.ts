@@ -8,3 +8,16 @@ export const toBanglaNumber = (num: number | string): string => {
   
   return num.toString().replace(/[0-9]/g, (digit) => banglaDigits[digit]);
 };
+
+export const unitToBanglaMap: Record<string, string> = {
+  kg: 'কেজি',
+  litre: 'লিটার',
+  dozen: 'ডজন',
+  piece: 'পিস',
+};
+
+export function toBanglaUnit(unit: string): string {
+  if (!unit) return '';
+  const normalizedUnit = unit.toLowerCase().trim();
+  return unitToBanglaMap[normalizedUnit] || unit;
+}

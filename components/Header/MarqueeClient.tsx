@@ -1,5 +1,5 @@
 "use client"
-import { toBanglaNumber } from '@/lib/formatter';
+import { toBanglaNumber, toBanglaUnit } from '@/lib/formatter';
 import Marquee from 'react-fast-marquee';
 
 interface Product {
@@ -26,9 +26,9 @@ function MarqueeClient({ products }: { products: Product[] }) {
                     {products.map((product) => {
                         const isUp = product.change?.dir === "up";
                         return (
-                            <div key={product.id} className="flex items-center gap-2 text-sm font-medium text-[#1D271F] mx-4">
+                            <div key={product.id} className="flex items-center gap-2 text-sm font-medium text-[#1D271F] mx-4 cursor-default">
                                 <span className='font-semibold'>{product.categoryIcon} {product.nameBn}</span>
-                                <span className='font-semibold'><span className='inter'>{toBanglaNumber(product.today)}</span> টাকা/{product.unit === "kg" ? "কেজি" : "লিটার"}</span>
+                                <span className='font-semibold'><span className='inter'>{toBanglaNumber(product.today)}</span> টাকা/{toBanglaUnit(product.unit)}</span>
                                 <span
                                     className={`text-xs px-1.5 py-0.5 rounded font-bold inter 
                                     ${isUp

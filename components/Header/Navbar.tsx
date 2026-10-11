@@ -52,6 +52,10 @@ function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProp
     });
   }
 
+  const handleProfile = () =>{
+    router.push('/profile')
+  } 
+
   const params = useParams();
   const category = params.slug as string
 
@@ -90,7 +94,7 @@ function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProp
   const rightContent = (
     session?.user ? <div className="flex items-center">
       <Avatar className="rounded-l-lg rounded-r-none h-10">
-        <Avatar.Image alt={session.user.name} src={session.user.image} />
+        <Avatar.Image alt={session.user.name} src={session?.user?.image || ""} />
         <Avatar.Fallback className="rounded-lg"><Person /></Avatar.Fallback>
       </Avatar>
       <Dropdown>
@@ -105,7 +109,7 @@ function Navbar({ className, maxWidth = "lg", position = "sticky", }: NavbarProp
                 <p>{session.user.email}</p>
               </Label>
             </Dropdown.Item>
-            <Dropdown.Item id="profile" textValue="Profile">
+            <Dropdown.Item id="profile" textValue="Profile" onClick={handleProfile}>
               <Label className="flex items-center gap-2"><Person /> আমার প্রোফাইল</Label>
             </Dropdown.Item>
             <Dropdown.Item id="logout" textValue="Log out"  onClick={handleSignOut} >
